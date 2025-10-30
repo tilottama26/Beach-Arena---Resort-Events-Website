@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Arena - Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 20px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff6b6b;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+
+        .gallery-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 35px;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            animation: fadeIn 0.6s ease both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            animation: fadeInScale 0.6s ease both;
+        }
+
+        .gallery-item:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .gallery-item:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .gallery-item:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .gallery-item:nth-child(4) {
+            animation-delay: 0.25s;
+        }
+
+        .gallery-item:nth-child(5) {
+            animation-delay: 0.3s;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.15) rotate(2deg);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay p {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Lightbox */
+        #lightbox-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            animation: fadeInLightbox 0.3s ease;
+        }
+
+        #lightbox-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeInLightbox {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #lightbox-overlay img {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(255, 255, 255, 0.1);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        #lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            font-weight: 300;
+        }
+
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 60px;
+            color: white;
+            cursor: pointer;
+            padding: 20px;
+            transition: all 0.3s ease;
+            user-select: none;
+            font-weight: 300;
+        }
+
+        #prev-arrow {
+            left: 30px;
+        }
+
+        #next-arrow {
+            right: 30px;
+        }
+
+        #prev-arrow:hover,
+        #next-arrow:hover,
+        #lightbox-close:hover {
+            color: #ffd93d;
+            transform: scale(1.2);
+        }
+
+        #prev-arrow:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        #next-arrow:hover {
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        /* Image counter */
+        .image-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+
+        footer p:last-child {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-section {
+                padding: 30px 20px;
+            }
+
+            .gallery-section h3 {
+                font-size: 1.5rem;
+                margin-bottom: 25px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            nav ul {
+                gap: 20px;
+                padding: 15px;
+            }
+
+            #lightbox-close {
+                top: 20px;
+                right: 30px;
+                font-size: 40px;
+            }
+
+            .lightbox-arrow {
+                font-size: 40px;
+                padding: 10px;
+            }
+
+            #prev-arrow {
+                left: 15px;
+            }
+
+            #next-arrow {
+                right: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>Our Gallery</h1>
+        <p>Capturing moments of paradise and adventure</p>
+    </div>
+
+    <section class="gallery-section">
+        <h3>🏖️ Beach Views</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2016/11/18/18/39/beach-1836335_1280.jpg"
+                    alt="Crystal Clear Water">
+                <div class="gallery-overlay">
+                    <p>Crystal Clear Water</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2015/06/01/05/58/shells-792912_1280.jpg" alt="Sea Shells">
+                <div class="gallery-overlay">
+                    <p>Sea Shells</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2015/03/02/23/40/father-656734_1280.jpg"
+                    alt="Family Time at the Beach">
+                <div class="gallery-overlay">
+                    <p>Family Time at the Beach</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2015/06/24/15/18/beach-820210_1280.jpg" alt="Calm Evenings">
+                <div class="gallery-overlay">
+                    <p>Calm Evenings</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2021/11/25/07/18/beach-6822823_1280.jpg" alt="People Enjoying">
+                <div class="gallery-overlay">
+                    <p>People Enjoying</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h3>🏐 Activities</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2020/08/04/13/28/man-5462849_1280.jpg" alt="Surfing">
+                <div class="gallery-overlay">
+                    <p>Surfing</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2020/07/20/08/04/beach-5422214_1280.jpg" alt="Beach Ball">
+                <div class="gallery-overlay">
+                    <p>Beach Ball</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2014/07/12/16/01/sandburg-391265_1280.jpg" alt="Sand Castle">
+                <div class="gallery-overlay">
+                    <p>Sand Castle</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2017/06/24/07/00/beach-volleyball-2436828_1280.jpg"
+                    alt="Beach Volleyball">
+                <div class="gallery-overlay">
+                    <p>Beach Volleyball</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2016/08/10/17/18/activity-1583805_1280.jpg" alt="Yoga Session">
+                <div class="gallery-overlay">
+                    <p>Yoga Session</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h3>🍴 Food & Dining</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2018/07/18/19/12/pasta-3547078_1280.jpg" alt="Seafood">
+                <div class="gallery-overlay">
+                    <p>Seafood</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2020/02/07/22/42/meal-4828580_1280.jpg" alt="Meal Restaurant">
+                <div class="gallery-overlay">
+                    <p>Meal Restaurant</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2022/02/12/21/22/toast-7009956_1280.jpg" alt="Sandwich">
+                <div class="gallery-overlay">
+                    <p>Sandwich</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2016/03/23/15/00/ice-cream-1274894_1280.jpg" alt="Ice-cream">
+                <div class="gallery-overlay">
+                    <p>Ice-cream</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2013/02/21/19/06/drink-84533_1280.jpg" alt="Cocktails">
+                <div class="gallery-overlay">
+                    <p>Cocktails</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h3>🌸 Seasonal Beach Vibes</h3>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2021/05/29/03/00/beach-6292382_1280.jpg" alt="Summer">
+                <div class="gallery-overlay">
+                    <p>Summer</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://cdn.pixabay.com/photo/2022/02/19/21/46/beach-7023446_1280.jpg" alt="Winter">
+                <div class="gallery-overlay">
+                    <p>Winter</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://media.istockphoto.com/id/1408164910/photo/vagator-beach-in-north-goa-on-a-windy-and-cloudy-day-during-monsoon-season.jpg?s=2048x2048&w=is&k=20&c=2bXqV9xZkhrABCpoX1aXp78glLwgLcW4E5LebUXU_NI="
+                    alt="Monsoon">
+                <div class="gallery-overlay">
+                    <p>Monsoon</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="lightbox-overlay">
+        <span id="lightbox-close">&times;</span>
+        <img src="" alt="Expanded view">
+        <span class="lightbox-arrow" id="prev-arrow">&#10094;</span>
+        <span class="lightbox-arrow" id="next-arrow">&#10095;</span>
+        <div class="image-counter"><span id="current-index">1</span> / <span id="total-images">0</span></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Beach Arena. All rights reserved.</p>
+        <p>Made with ❤️ by Team Beach Arena</p>
+    </footer>
+
+    <script>
+        // Lightbox functionality
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const lightbox = document.getElementById('lightbox-overlay');
+        const lightboxImg = lightbox.querySelector('img');
+        const closeBtn = document.getElementById('lightbox-close');
+        const prevBtn = document.getElementById('prev-arrow');
+        const nextBtn = document.getElementById('next-arrow');
+        const currentIndexSpan = document.getElementById('current-index');
+        const totalImagesSpan = document.getElementById('total-images');
+
+        let currentIndex = 0;
+        let allImages = Array.from(galleryItems);
+
+        // Set total images count
+        totalImagesSpan.textContent = allImages.length;
+
+        // Open lightbox
+        galleryItems.forEach((img, index) => {
+            img.parentElement.addEventListener('click', () => {
+                lightbox.classList.add('active');
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                currentIndex = index;
+                updateCounter();
+            });
+        });
+
+        // Close lightbox
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        // Close on background click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Navigation
+        function showImage(index) {
+            if (index < 0) index = allImages.length - 1;
+            if (index >= allImages.length) index = 0;
+            currentIndex = index;
+            lightboxImg.src = allImages[currentIndex].src;
+            lightboxImg.alt = allImages[currentIndex].alt;
+            updateCounter();
+        }
+
+        function updateCounter() {
+            currentIndexSpan.textContent = currentIndex + 1;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            showImage(currentIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            showImage(currentIndex + 1);
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') lightbox.classList.remove('active');
+                if (e.key === 'ArrowLeft') showImage(currentIndex - 1);
+                if (e.key === 'ArrowRight') showImage(currentIndex + 1);
+            }
+        });
+    </script>
+</body>
+
+</html>

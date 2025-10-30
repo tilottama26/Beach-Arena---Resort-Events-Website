@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Arena - Contact Us</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 20px;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #ff6b6b;
+        }
+
+        /* Hero Section */
+        .hero-contact {
+            position: relative;
+            background: url('https://cdn.pixabay.com/photo/2019/09/16/19/52/beach-4481919_1280.jpg') center/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+            overflow: hidden;
+        }
+
+        .hero-contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-contact h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-contact p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contact Info Section */
+        .contact-info {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeIn 0.6s ease 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-info h3 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .info-item {
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .info-item p {
+            color: #4a5568;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Forms Container */
+        .forms-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+        }
+
+        /* Contact Form Styles */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.6s ease both;
+        }
+
+        .general-form {
+            animation-delay: 0.4s;
+        }
+
+        .registration-form {
+            animation-delay: 0.5s;
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .registration-form::before {
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d);
+        }
+
+        .contact-form h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .contact-form>p {
+            color: #718096;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .contact-form label {
+            display: block;
+            margin: 20px 0 8px;
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .registration-form input:focus,
+        .registration-form select:focus,
+        .registration-form textarea:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form select {
+            cursor: pointer;
+        }
+
+        .contact-form button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .registration-form button {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .contact-form button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-form button:hover::before {
+            left: 100%;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .registration-form button:hover {
+            box-shadow: 0 6px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+        }
+
+        footer p:last-child {
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-contact h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-contact p {
+                font-size: 1.1rem;
+            }
+
+            .forms-container {
+                grid-template-columns: 1fr;
+                padding: 0 20px;
+            }
+
+            .contact-form {
+                padding: 30px 25px;
+            }
+
+            .contact-info {
+                margin: 30px 20px;
+                padding: 30px 20px;
+            }
+
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 20px;
+                padding: 15px;
+            }
+        }
+
+        /* Success Message Animation */
+        @keyframes successPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero-contact">
+        <div class="hero-content">
+            <h1>Connect Now.</h1>
+            <p>We'd love to hear from you!</p>
+        </div>
+    </section>
+
+    <section class="contact-info">
+        <h3>Our Information</h3>
+        <div class="contact-info-grid">
+            <div class="info-item">
+                <strong>📍 Address</strong>
+                <p>Beach Arena, Goa, India</p>
+            </div>
+            <div class="info-item">
+                <strong>📧 Email</strong>
+                <p>info@beacharena.com</p>
+            </div>
+            <div class="info-item">
+                <strong>📞 Phone</strong>
+                <p>+91 98765 43210<br>+91 22789809</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="forms-container">
+        <section class="contact-form general-form">
+            <h2>Have Feedback?</h2>
+            <p>Let us know your thoughts and suggestions!</p>
+            <form action="#" method="post">
+                <label for="contact-name">Full Name:</label>
+                <input type="text" id="contact-name" name="name" required placeholder="John Doe">
+
+                <label for="contact-email">Email Address:</label>
+                <input type="email" id="contact-email" name="email" required placeholder="john@example.com">
+
+                <label for="contact-message">Your Message:</label>
+                <textarea id="contact-message" name="message" required
+                    placeholder="Share your thoughts with us..."></textarea>
+
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </section>
+
+        <section class="contact-form registration-form" id="register-form">
+            <h2>Event Registration</h2>
+            <p>Fill in your details to register for our upcoming events!</p>
+            <form action="#" method="post">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="John Doe">
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="john@example.com">
+
+                <label for="event">Select Event:</label>
+                <select id="event" name="event" required>
+                    <option value="">--Choose an event--</option>
+                    <option value="Full Moon Beach Party">Full Moon Beach Party</option>
+                    <option value="Beach Volleyball Tournament">Beach Volleyball Tournament</option>
+                    <option value="Sunset Yoga Sessions">Sunset Yoga Sessions</option>
+                </select>
+
+                <label for="message">Additional Notes (optional):</label>
+                <textarea id="message" name="message" placeholder="Any special requests or questions?"></textarea>
+
+                <button type="submit" class="btn">Submit Registration</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Beach Arena. All rights reserved.</p>
+        <p>Made with ❤️ by Team Beach Arena</p>
+    </footer>
+
+    <script>
+        // Form submission handling (basic example)
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Get the button
+                const button = this.querySelector('button[type="submit"]');
+                const originalText = button.textContent;
+
+                // Show loading state
+                button.textContent = 'Sending...';
+                button.style.opacity = '0.7';
+                button.disabled = true;
+
+                // Simulate submission (replace with actual submission logic)
+                setTimeout(() => {
+                    button.textContent = '✓ Sent Successfully!';
+                    button.style.background = 'linear-gradient(135deg, #6bcf7f 0%, #4ade80 100%)';
+                    button.style.animation = 'successPulse 0.5s ease';
+
+                    // Reset form
+                    this.reset();
+
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.opacity = '1';
+                        button.disabled = false;
+                        button.style.animation = '';
+
+                        // Reset background color based on form type
+                        if (this.closest('.registration-form')) {
+                            button.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%)';
+                        } else {
+                            button.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                        }
+                    }, 3000);
+                }, 1500);
+            });
+        });
+
+        // Add focus effect to form inputs
+        document.querySelectorAll('input, textarea, select').forEach(input => {
+            input.addEventListener('focus', function () {
+                this.parentElement.style.transform = 'translateX(5px)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+
+            input.addEventListener('blur', function () {
+                this.parentElement.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+
+</html>
